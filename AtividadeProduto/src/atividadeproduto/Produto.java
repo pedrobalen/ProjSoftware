@@ -4,10 +4,6 @@
  */
 package atividadeproduto;
 
-import com.opencsv.CSVWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
 
 /**
  *
@@ -15,33 +11,19 @@ import java.util.List;
  */
 public class Produto {
 
-    public Produto(String codigo1, String nome1, String descricao1, double preco1, int quantidade1) {
-    }
     private String nome;
     private String codigo;
     private String descricao;
     private double preco;
+    private int quantidade;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCodigo(String codigo) {
+    public Produto(String codigo, String nome, String descricao, double preco, int quantidade) {
         this.codigo = codigo;
-    }
-
-    public void setDescricao(String descricao) {
+        this.nome = nome;
         this.descricao = descricao;
-    }
-
-    public void setPreco(double preco) {
         this.preco = preco;
-    }
-
-    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-    private int quantidade;
 
     public String getNome() {
         return nome;
@@ -53,7 +35,7 @@ public class Produto {
 
     public String getDescricao() {
         return descricao;
-    }   
+    }
 
     public double getPreco() {
         return preco;
@@ -62,18 +44,5 @@ public class Produto {
     public int getQuantidade() {
         return quantidade;
     }
-    
-    private void cadastrar(String nome, String codigo, String descricao, double preco, int quantidade){
-        this.nome = nome;
-        this.codigo = codigo;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.quantidade = quantidade;
-    }
-    
-    
-    
-    
-    
-    
 }
+

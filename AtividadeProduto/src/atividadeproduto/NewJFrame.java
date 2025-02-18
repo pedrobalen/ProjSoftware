@@ -23,29 +23,37 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
     }
-    
+
     private void salvarCSV() {
         String codigo = txt_codigo.getText();
         String nome = txt_nome.getText();
         String descricao = txt_descricao.getText();
-        double preco = Double.parseDouble(txt_preco.getText());
-        int quantidade = Integer.parseInt(txt_quantidade.getText()); 
+        double preco;
+        int quantidade;
+
+        try {
+            preco = Double.parseDouble(txt_preco.getText());
+            quantidade = Integer.parseInt(txt_quantidade.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Preço e Quantidade devem ser números válidos.");
+            return;
+        }
 
         Produto produto = new Produto(codigo, nome, descricao, preco, quantidade);
 
-        String csvFile = "produtos.csv"; 
-        try (CSVWriter writer = new CSVWriter(new FileWriter(csvFile, true))) { 
+        String csvFile = "produtos.csv";
+        try (CSVWriter writer = new CSVWriter(new FileWriter(csvFile, true))) {
             if (new java.io.File(csvFile).length() == 0) {
                 String[] header = {"Código", "Nome", "Descrição", "Preço", "Quantidade"};
                 writer.writeNext(header);
             }
 
             String[] row = {
-                produto.getCodigo(),
-                produto.getNome(),
-                produto.getDescricao(),
-                String.valueOf(produto.getPreco()),
-                String.valueOf(produto.getQuantidade())
+                    produto.getCodigo(),
+                    produto.getNome(),
+                    produto.getDescricao(),
+                    String.valueOf(produto.getPreco()),
+                    String.valueOf(produto.getQuantidade())
             };
             writer.writeNext(row);
 
@@ -53,8 +61,6 @@ public class NewJFrame extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Erro ao salvar o arquivo CSV: " + e.getMessage());
         }
-                System.out.println(produto.getNome());
-
     }
 
     /**
